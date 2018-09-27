@@ -18,8 +18,8 @@ import rx.functions.Action0;
 import tcking.github.com.giraffeplayer2.GiraffePlayer;
 import tcking.github.com.giraffeplayer2.VideoInfo;
 
-import static com.github.tcking.giraffecompressor.GiraffeCompressor.TYPE_FFMPEG;
-import static com.github.tcking.giraffecompressor.GiraffeCompressor.TYPE_MEDIACODEC;
+//import static com.github.tcking.giraffecompressor.GiraffeCompressor.TYPE_FFMPEG;
+//import static com.github.tcking.giraffecompressor.GiraffeCompressor.TYPE_MEDIACODEC;
 
 public class MainActivity extends AppCompatActivity {
     private ViewQuery $;
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        GiraffeCompressor.create($.id(R.id.rb_m).checked() ? TYPE_MEDIACODEC : TYPE_FFMPEG)//默认采用mediacodec,可通过create(TYPE_FFMPEG)获取ffmpeg的实现
+//        GiraffeCompressor.create($.id(R.id.rb_m).checked() ? TYPE_MEDIACODEC : TYPE_FFMPEG)//默认采用mediacodec,可通过create(TYPE_FFMPEG)获取ffmpeg的实现
+        GiraffeCompressor.create()//默认采用mediacodec,可通过create(TYPE_FFMPEG)获取ffmpeg的实现
                 .input(inputText) //set video to be compressed
                 .output($.id(R.id.et_output).text()) //set compressed video output
                 .bitRate(Integer.parseInt($.id(R.id.et_bitrate).text()))//set bitrate 码率

@@ -3,8 +3,8 @@ package com.github.tcking.giraffecompressor;
 import android.content.Context;
 import android.os.Build;
 
-import com.github.tcking.giraffecompressor.ffmpeg.FFMPEGCmdExecutorFactory;
-import com.github.tcking.giraffecompressor.ffmpeg.FFMPEGVideoCompressor;
+//import com.github.tcking.giraffecompressor.ffmpeg.FFMPEGCmdExecutorFactory;
+//import com.github.tcking.giraffecompressor.ffmpeg.FFMPEGVideoCompressor;
 import com.github.tcking.giraffecompressor.mediacodec.JellyMediaCodecVideoCompressor;
 import com.github.tcking.giraffecompressor.mediacodec.LollipopMediaCodecVideoCompressor;
 
@@ -24,9 +24,9 @@ public abstract class GiraffeCompressor {
     public static boolean DEBUG = false;
     protected static Context context;
     public static final String TAG = "GiraffeCompressor";
-    public static final String TYPE_MEDIACODEC="media_codec";
-    public static final String TYPE_FFMPEG="ffmpeg";
-    protected static boolean FFmpegNotSupported = false;
+//    public static final String TYPE_MEDIACODEC="media_codec";
+//    public static final String TYPE_FFMPEG="ffmpeg";
+//    protected static boolean FFmpegNotSupported = false;
 
     protected File inputFile;
     protected File outputFile;
@@ -40,30 +40,35 @@ public abstract class GiraffeCompressor {
         return this;
     }
 
-    public static GiraffeCompressor create(String type) {
-        if (TYPE_FFMPEG.equals(type)) {
-            return new FFMPEGVideoCompressor();
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                return new LollipopMediaCodecVideoCompressor();
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                return new JellyMediaCodecVideoCompressor();
-            } else {
-                return new FFMPEGVideoCompressor();
-            }
-        }
-    }
+//    public static GiraffeCompressor create(String type) {
+//        if (TYPE_FFMPEG.equals(type)) {
+//            return new FFMPEGVideoCompressor();
+//        } else {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                return new LollipopMediaCodecVideoCompressor();
+//            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//                return new JellyMediaCodecVideoCompressor();
+//            } else {
+//                return new FFMPEGVideoCompressor();
+//            }
+//        }
+//    }
 
     public static Context getContext() {
         return context;
     }
 
-    private static void initFFMPEG(Context context) {
-        FFMPEGCmdExecutorFactory.create().init(context);
-    }
+//    private static void initFFMPEG(Context context) {
+//        FFMPEGCmdExecutorFactory.create().init(context);
+//    }
 
     public static GiraffeCompressor create() {
-        return create(TYPE_MEDIACODEC);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            return new LollipopMediaCodecVideoCompressor();
+        else
+            return new JellyMediaCodecVideoCompressor();
+
+//        return create(TYPE_MEDIACODEC);
 
     }
 
@@ -104,8 +109,8 @@ public abstract class GiraffeCompressor {
                     if (watermarkFile != null) {
                         File tmp = new File(outputFilePath + ".tmp");
                         outputFile.renameTo(tmp);
-                        String cmd = "-i " + tmp.getAbsolutePath() + " -i " + watermarkFile.getAbsolutePath() + " -filter_complex "+filterComplex+" -f mp4 " + outputFilePath;
-                        FFMPEGCmdExecutorFactory.create().exec(cmd);
+//                        String cmd = "-i " + tmp.getAbsolutePath() + " -i " + watermarkFile.getAbsolutePath() + " -filter_complex "+filterComplex+" -f mp4 " + outputFilePath;
+//                        FFMPEGCmdExecutorFactory.create().exec(cmd);
                         tmp.delete();
                     }
                     result.endTime = System.currentTimeMillis();
@@ -167,7 +172,7 @@ public abstract class GiraffeCompressor {
 
     public static void init(Context ctx) {
         context = ctx;
-        initFFMPEG(context);
+//        initFFMPEG(context);
     }
 
     /**

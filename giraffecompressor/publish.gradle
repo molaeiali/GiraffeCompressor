@@ -23,7 +23,7 @@
 //}
 
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.jfrog.bintray'
 
 // load properties
 Properties properties = new Properties()
@@ -37,9 +37,9 @@ if(projectPropertiesFile.exists()){
     properties.load(projectPropertiesFile.newDataInputStream())
 }
 
-Properties bintrayPro = new Properties()
-File propFile = "${System.properties['user.home']}${File.separator}.gradle${File.separator}bintray.properties" as File
-bintrayPro.load(propFile.newDataInputStream())
+//Properties bintrayPro = new Properties()
+//File propFile = "${System.properties['user.home']}${File.separator}.gradle${File.separator}bintray.properties" as File
+//bintrayPro.load(propFile.newDataInputStream())
 
 //read properties
 def projectName = properties.getProperty("project.name")
@@ -55,8 +55,8 @@ def projectIssueTrackerUrl = properties.getProperty("project.issueTrackerUrl")
 def developerName = properties.getProperty("developer.name")
 def developerEmail = properties.getProperty("developer.email")
 
-def bintrayUser = bintrayPro.getProperty("bintray.user")
-def bintrayApikey = bintrayPro.getProperty("bintray.apikey")
+//def bintrayUser = bintrayPro.getProperty("bintray.user")
+//def bintrayApikey = bintrayPro.getProperty("bintray.apikey")
 
 def javadocName = properties.getProperty("javadoc.name")
 
@@ -127,19 +127,19 @@ javadoc {
     }
 }
 
-bintray {
-    user = bintrayUser
-    key = bintrayApikey
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = projectName
-        desc = projectDesc
-        websiteUrl = projectSiteUrl
-        issueTrackerUrl = projectIssueTrackerUrl
-        vcsUrl = projectGitUrl
-        labels = ['android', 'view', 'Query']
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}
+//bintray {
+//    user = bintrayUser
+//    key = bintrayApikey
+//    configurations = ['archives']
+//    pkg {
+//        repo = "maven"
+//        name = projectName
+//        desc = projectDesc
+//        websiteUrl = projectSiteUrl
+//        issueTrackerUrl = projectIssueTrackerUrl
+//        vcsUrl = projectGitUrl
+//        labels = ['android', 'view', 'Query']
+//        licenses = ["Apache-2.0"]
+//        publish = true
+//    }
+//}
